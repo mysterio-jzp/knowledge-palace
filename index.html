@@ -9,6 +9,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- MathJax：渲染 $...$ 行内公式与 $$...$$ 块级公式 -->
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre','code'] },
+    startup: { typeset: false }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
 
 
@@ -340,6 +349,10 @@ footer .copy{margin-top:2.6rem;color:var(--fg-faint);font-size:.78rem;letter-spa
 /* wikilink style (Obsidian internal links, no target on blog) */
 .article-body .wikilink{color:var(--gold);border-bottom:1px dotted var(--gold-dim);cursor:default}
 .article-body .loading{color:var(--fg-mute);letter-spacing:.3em;font-style:italic;padding:2rem 0}
+/* MathJax 公式：继承文字颜色，深浅主题均可读；块级公式可横向滚动 */
+.article-body mjx-container{color:inherit}
+.article-body mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden;margin:1.5em 0;padding:.2em 0}
+.article-body mjx-container:focus{outline:none}
 </style>
 </head>
 <body>
@@ -443,6 +456,17 @@ function md2html(md) {
     codeBlocks.push(block);
     return '\n%%CODEBLOCK' + (codeBlocks.length - 1) + '%%\n';
   });
+  // Math: extract display ($$...$$) and inline ($...$) into placeholders BEFORE
+  // any markdown/HTML processing, so formulas are never mangled by esc() or re-parsed.
+  var mathBlocks = [], mathInlines = [];
+  html = html.replace(/\$\$([\s\S]*?)\$\$/g, function(_, m) {
+    mathBlocks.push(m);
+    return '\n%%MATHBLOCK' + (mathBlocks.length - 1) + '%%\n';
+  });
+  html = html.replace(/\$([^\s$](?:[^$\n]*[^\s$])?)\$/g, function(_, m) {
+    mathInlines.push(m);
+    return '%%MATHINLINE' + (mathInlines.length - 1) + '%%';
+  });
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
@@ -468,7 +492,7 @@ function md2html(md) {
       if (inTable) { out.push('</table>'); inTable = false; }
       out.push(''); continue;
     }
-    if (t.indexOf('%%CODEBLOCK') === 0) { out.push(t); continue; }
+    if (t.indexOf('%%CODEBLOCK') === 0 || t.indexOf('%%MATHBLOCK') === 0) { out.push(t); continue; }
     if (t.startsWith('<h') || t.startsWith('<pre') || t.startsWith('<blockquote') || t.startsWith('<hr') || t.startsWith('<table') || t.startsWith('<tr') || t === '<!--sep-->') {
       if (inList) { out.push('</ul>'); inList = false; }
       out.push(t); continue;
@@ -488,10 +512,27 @@ function md2html(md) {
   html = out.join('\n');
   html = html.replace(/<p>\s*<\/p>/g, '');
   html = html.replace(/%%CODEBLOCK(\d+)%%/g, function(_, i) { return codeBlocks[+i] || ''; });
+  // Restore math placeholders (content HTML-escaped so < > & in formulas are safe in DOM)
+  html = html.replace(/%%MATHBLOCK(\d+)%%/g, function(_, i) { return '$$' + esc(mathBlocks[+i] || '') + '$$'; });
+  html = html.replace(/%%MATHINLINE(\d+)%%/g, function(_, i) { return '$' + esc(mathInlines[+i] || '') + '$'; });
   return html;
 }
 
 function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// Render math in a container after the DOM is set. Waits for the async MathJax lib if needed.
+function renderMath(el) {
+  function run() {
+    if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]).catch(function() {});
+  }
+  if (window.MathJax && MathJax.typesetPromise) { run(); return; }
+  var tries = 0;
+  var iv = setInterval(function() {
+    tries++;
+    if (window.MathJax && MathJax.typesetPromise) { clearInterval(iv); run(); }
+    else if (tries > 80) { clearInterval(iv); }
+  }, 100);
+}
 
 function bindCopyButtons() {
   document.querySelectorAll('#aBody .copy-btn').forEach(function(btn) {
@@ -587,6 +628,7 @@ function openArticle(id) {
   if (cache[id] !== undefined) {
     document.getElementById('aBody').innerHTML = md2html(cache[id]);
     bindCopyButtons();
+    renderMath(document.getElementById('aBody'));
     return;
   }
   fetch(item.file, {cache:'no-store'}).then(function(r) {
@@ -598,6 +640,7 @@ function openArticle(id) {
         document.getElementById('aTitle').textContent === item.title) {
       document.getElementById('aBody').innerHTML = md2html(text);
       bindCopyButtons();
+      renderMath(document.getElementById('aBody'));
     }
   }).catch(function() {
     document.getElementById('aBody').innerHTML = '<p class="loading">此卷暂不可读。</p>';
