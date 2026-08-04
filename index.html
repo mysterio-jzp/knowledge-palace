@@ -70,6 +70,7 @@
 :root[data-theme="light"] .article-body code{
   background:rgba(122,95,34,.1);
 }
+:root[data-theme="light"] .article-body .code-block pre code{background:none}
 
 *{margin:0;padding:0;box-sizing:border-box}
 
@@ -446,15 +447,17 @@ function md2html(md) {
     var label = (parts[1] || parts[0]).trim();
     return '<span class="wikilink">' + esc(label) + '</span>';
   });
-  // Fenced code blocks — use a placeholder so inner code is never re-parsed as markdown
+  // Fenced code blocks — use a placeholder so inner code is never re-parsed as markdown.
+  // 围栏必须在行首；闭合围栏只认行首的 ```，避免代码内容里的 ``` 被误当闭合符；
+  // 未闭合的围栏（笔记被截断）按到文件末尾整体处理。
   var codeBlocks = [];
-  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, function(_, lang, code) {
-    var l = lang ? lang : 'text';
+  html = html.replace(/(^|\n)```([^\n`]*)[ \t]*\n?([\s\S]*?)(\n```[ \t]*(?:\n|$)|$)/g, function(_, lead, lang, code) {
+    var l = (lang || '').trim() || 'text';
     var block = '<div class="code-block"><div class="code-head"><span class="code-lang">' + esc(l) +
       '</span><button class="copy-btn" type="button">复制</button></div><pre><code>' +
       esc(code.trim()) + '</code></pre></div>';
     codeBlocks.push(block);
-    return '\n%%CODEBLOCK' + (codeBlocks.length - 1) + '%%\n';
+    return (lead === '\n' ? '\n' : '') + '%%CODEBLOCK' + (codeBlocks.length - 1) + '%%\n';
   });
   // Math: extract display ($$...$$) and inline ($...$) into placeholders BEFORE
   // any markdown/HTML processing, so formulas are never mangled by esc() or re-parsed.
@@ -467,7 +470,8 @@ function md2html(md) {
     mathInlines.push(m);
     return '%%MATHINLINE' + (mathInlines.length - 1) + '%%';
   });
-  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  // 行内 code 也要转义，否则含 < > & 的内容会被浏览器当成 HTML 标签吞掉
+  html = html.replace(/`([^`]+)`/g, function(_, c) { return '<code>' + esc(c) + '</code>'; });
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
   html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
