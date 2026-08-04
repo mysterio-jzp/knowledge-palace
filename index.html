@@ -308,7 +308,7 @@ footer .copy{margin-top:2.6rem;color:rgba(239,230,208,.28);font-size:.78rem;lett
       </div>
       <div class="stat-item">
         <p class="num" id="statRooms">0</p>
-        <p class="label">殿室</p>
+        <p class="label">分类</p>
       </div>
       <div class="stat-item">
         <p class="num" id="statDays">0</p>
@@ -317,7 +317,7 @@ footer .copy{margin-top:2.6rem;color:rgba(239,230,208,.28);font-size:.78rem;lett
     </section>
 
     <div class="actions reveal">
-      <input type="text" id="search" class="search-input" placeholder="全域检索 · 按篇名、标签、殿室——" />
+      <input type="text" id="search" class="search-input" placeholder="全域检索 · 按篇名、标签、分类——" />
       <button id="randomBtn" class="random-btn">随缘翻阅</button>
     </div>
 
@@ -345,17 +345,21 @@ footer .copy{margin-top:2.6rem;color:rgba(239,230,208,.28);font-size:.78rem;lett
 /* ================== DATA ================== */
 var ITEMS = [];
 var cache = {};   // id -> markdown content
-var ROOMS = [
-  {id:'all',  zh:'全殿总览', en:'All'},
-  {id:'wenyuan', zh:'文渊阁', en:'Agent Engineering'},
-  {id:'tongdian', zh:'通典阁', en:'Protocols & Architecture'},
-  {id:'guanxing', zh:'观星台', en:'AI Theory'},
-  {id:'shulizhai', zh:'数理斋', en:'Mathematics'},
-  {id:'shiyi', zh:'拾遗廊', en:'Overview & Misc'},
-];
-
-function roomName(id){ var r=ROOMS.find(function(x){ return x.id===id; }); return r ? r.zh : id; }
-function roomEn(id){ var r=ROOMS.find(function(x){ return x.id===id; }); return r ? r.en : id; }
+// 分类完全数据驱动：room = vault 一级真实目录名，path = 完整相对路径（面包屑）
+var CAT_ORDER = ['Agent','人工智能基础','线性代数','网络工程','其他'];
+var CATS = [{id:'all', name:'全部'}];
+function buildCats() {
+  var seen = {};
+  ITEMS.forEach(function(i){ if (!(i.room in seen)) seen[i.room] = i.room; });
+  var keys = Object.keys(seen);
+  keys.sort(function(a, b) {
+    var ia = CAT_ORDER.indexOf(a), ib = CAT_ORDER.indexOf(b);
+    if (ia === -1) ia = 999; if (ib === -1) ib = 999;
+    return ia - ib;
+  });
+  CATS = [{id:'all', name:'全部'}].concat(keys.map(function(k){ return {id:k, name:seen[k]}; }));
+}
+function catName(id){ var c = CATS.find(function(x){ return x.id === id; }); return c ? c.name : id; }
 
 /* ================== MARKDOWN RENDERER ================== */
 function md2html(md) {
@@ -432,14 +436,14 @@ function currentItems() {
     if (activeRoom !== 'all' && i.room !== activeRoom) return false;
     if (!query) return true;
     var q = query.toLowerCase();
-    return (i.title + i.summary + i.tags.join('') + roomName(i.room)).toLowerCase().includes(q);
+    return (i.title + i.summary + i.tags.join('') + i.room + i.path).toLowerCase().includes(q);
   });
 }
 
 function renderTabs() {
-  document.getElementById('tabs').innerHTML = ROOMS.map(function(r) {
+  document.getElementById('tabs').innerHTML = CATS.map(function(r) {
     var n = r.id === 'all' ? ITEMS.length : ITEMS.filter(function(i) { return i.room === r.id; }).length;
-    return '<button class="tab' + (activeRoom === r.id ? ' active' : '') + '" data-room="' + r.id + '">' + r.zh + '<em>' + r.en + '</em><span class="n">' + n + '</span></button>';
+    return '<button class="tab' + (activeRoom === r.id ? ' active' : '') + '" data-room="' + r.id + '">' + esc(r.name) + '<span class="n">' + n + '</span></button>';
   }).join('');
 }
 
@@ -449,19 +453,19 @@ function renderSpotlight() {
   var sp = document.getElementById('spotlight');
   if (!pick) { sp.style.display = 'none'; return; }
   sp.style.display = 'block';
-  sp.innerHTML = '<p class="k">镇馆之宝 · SPOTLIGHT</p><h3>' + esc(pick.title) + '</h3><p>' + esc(pick.summary) + '</p><p class="from">— ' + esc(pick.from) + ' · ' + esc(roomName(pick.room)) + '</p>';
+  sp.innerHTML = '<p class="k">镇馆之宝 · SPOTLIGHT</p><h3>' + esc(pick.title) + '</h3><p>' + esc(pick.summary) + '</p><p class="from">— ' + esc(pick.from) + ' · ' + esc(catName(pick.room)) + '</p>';
   sp.onclick = function() { openArticle(pick.id); };
 }
 
 function renderGrid() {
   var list = currentItems();
   var grid = document.getElementById('grid');
-  if (!list.length) { grid.innerHTML = '<div class="empty">此殿空空如也，换个殿室看看——</div>'; }
+  if (!list.length) { grid.innerHTML = '<div class="empty">此分类空空如也，换个分类看看——</div>'; }
   else {
     grid.innerHTML = list.map(function(i, idx) {
       return '<article class="card" data-id="' + i.id + '" style="transition-delay:' + Math.min(idx*45,400) + 'ms">' +
         '<span class="date">' + esc(i.date) + '</span>' +
-        '<span class="room-tag">' + esc(roomEn(i.room)) + ' · ' + esc(roomName(i.room)) + '</span>' +
+        '<span class="room-tag">' + esc(i.path) + '</span>' +
         '<h4>' + esc(i.title) + '</h4>' +
         '<p>' + esc(i.summary || '') + '</p>' +
         '<div class="tags">' + i.tags.map(function(t) { return '<i>' + esc(t) + '</i>'; }).join('') + '</div>' +
@@ -480,7 +484,7 @@ function openArticle(id) {
   var ap = document.getElementById('articlePage');
   document.getElementById('homePage').style.display = 'none';
   ap.classList.add('active');
-  document.getElementById('aRoom').textContent = roomEn(item.room) + ' · ' + roomName(item.room);
+  document.getElementById('aRoom').textContent = item.path;
   document.getElementById('aTitle').textContent = item.title;
   document.getElementById('aMeta').textContent = '收藏于 ' + item.date + ' · ' + item.from;
   document.getElementById('aTags').innerHTML = item.tags.map(function(t) { return '<i>' + esc(t) + '</i>'; }).join('');
@@ -557,7 +561,7 @@ function countUp(el, target, ms) {
 function initStats() {
   var start = new Date('2025-06-01');
   countUp(document.getElementById('statItems'), ITEMS.length);
-  countUp(document.getElementById('statRooms'), ROOMS.length - 1);
+  countUp(document.getElementById('statRooms'), CATS.length - 1);
   countUp(document.getElementById('statDays'), Math.floor((Date.now() - start) / 864e5), 1600);
 }
 
@@ -589,6 +593,7 @@ function boot() {
     return r.json();
   }).then(function(data) {
     ITEMS = data;
+    buildCats();
     initStats();
     render();
     if (window.location.hash) handleRoute();
