@@ -430,6 +430,7 @@ function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>
 
 /* ================== APP LOGIC ================== */
 var activeRoom='all', query='';
+var homeScrollY = 0;   // 记住列表滚动位置，返回时不弹回 hero
 
 function currentItems() {
   return ITEMS.filter(function(i) {
@@ -481,6 +482,7 @@ function render() { renderTabs(); renderSpotlight(); renderGrid(); observe(); }
 function openArticle(id) {
   var item = ITEMS.find(function(i) { return i.id === id; });
   if (!item) return;
+  homeScrollY = window.scrollY;   // 记录当前列表位置
   var ap = document.getElementById('articlePage');
   document.getElementById('homePage').style.display = 'none';
   ap.classList.add('active');
@@ -496,7 +498,7 @@ function openArticle(id) {
     document.getElementById('aBody').innerHTML = md2html(cache[id]);
     return;
   }
-  fetch(item.file).then(function(r) {
+  fetch(item.file, {cache:'no-store'}).then(function(r) {
     if (!r.ok) throw new Error('not found');
     return r.text();
   }).then(function(text) {
@@ -514,7 +516,7 @@ function goHome() {
   document.getElementById('articlePage').classList.remove('active');
   document.getElementById('homePage').style.display = '';
   window.location.hash = '';
-  window.scrollTo(0, 0);
+  window.scrollTo(0, homeScrollY);
   observe();
 }
 
@@ -527,6 +529,7 @@ function handleRoute() {
   } else {
     document.getElementById('articlePage').classList.remove('active');
     document.getElementById('homePage').style.display = '';
+    window.scrollTo(0, homeScrollY);
   }
 }
 window.addEventListener('hashchange', handleRoute);
@@ -588,7 +591,7 @@ function observe() { document.querySelectorAll('.reveal:not(.in)').forEach(funct
 
 /* ================== BOOT ================== */
 function boot() {
-  fetch('notes.json').then(function(r) {
+  fetch('notes.json', {cache:'no-store'}).then(function(r) {
     if (!r.ok) throw new Error('no index');
     return r.json();
   }).then(function(data) {
