@@ -1,416 +1,350 @@
 [
  {
   "id": 0,
-  "room": "shiyi",
+  "room": "Agent",
+  "path": "Agent/Agent安全沙箱.md",
   "date": "2026-04-07",
   "title": "Agent安全沙箱",
   "tags": [
-   "安全沙箱",
-   "NsJail",
-   "进程隔离",
-   "Linux",
-   "命名空间"
+   ""
   ],
   "from": "Agent安全沙箱",
-  "summary": "Agent安全沙箱 > 来源：<https://blog.gitcode.com/6f402553a05060eee4d2723980d903e2.html>   > 原文标题：深入理解 NsJail：Linux 进程隔离工具详解 什么是 NsJail NsJail 是一个基于…",
+  "summary": "Agent安全沙箱 来源：<https://blog.gitcode.com/6f402553a05060eee4d2723980d903e2.html 原文标题：深入理解 NsJail：Linux 进程隔离工具详解 什么是 NsJail NsJail 是一个基于 Linux Namespace 的轻量级进程隔离工具。它通过组合 Linux 内核提供的安全能力，为单个进程构建高隔离、可控资源的运行",
   "file": "notes/0.md"
  },
  {
   "id": 1,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/LLM API 缓存机制对比分析技术文档.md",
   "date": "2026-05-06",
   "title": "LLM API 缓存机制对比分析",
   "tags": [
-   "LLM",
-   "API缓存",
-   "OpenAI",
-   "Gemini",
-   "Prompt Cache"
+   ""
   ],
   "from": "LLM API 缓存机制对比分析技术文档",
-  "summary": "1. 文档目的 本文档系统性地对比分析 OpenAI 与 Google Gemini 两大 LLM API 的缓存机制，基于实际 API 调用数据、官方文档及逻辑推演，总结两者的工作原理、差异及工程优化建议。 > 标注说明： > - ✅ = 有官方文档或可复现的实验证据支持 >…",
+  "summary": "1. 文档目的 本文档系统性地对比分析 OpenAI 与 Google Gemini 两大 LLM API 的缓存机制，基于实际 API 调用数据、官方文档及逻辑推演，总结两者的工作原理、差异及工程优化建议。 标注说明： ✅ = 有官方文档或可复现的实验证据支持 🔍 = 基于逻辑推演或间接证据，非官方确认 2. OpenAI 缓存机制 2.1 核心原理：严格前缀匹配 OpenAI 的 Prompt",
   "file": "notes/1.md"
  },
  {
   "id": 2,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/LLM 约束解码系统的架构设计.md",
   "date": "2026-05-06",
   "title": "LLM 约束解码系统的架构设计",
   "tags": [
-   "LLM",
-   "约束解码",
-   "JSON Schema",
-   "架构设计",
-   "结构化输出"
+   ""
   ],
   "from": "LLM 约束解码系统的架构设计",
-  "summary": "文档信息 - 版本: 1.0 - 最后更新: 2026-05-06 - 文档类型: 架构设计说明书 - 阅读对象: 系统架构师、算法工程师、后端开发人员 --- 1. 执行摘要 本文档描述了一个基于 API 级约束解码的 LLM 输出控制系统，该系统能够在文本生成过程中强制遵守…",
+  "summary": "文档信息 版本: 1.0 最后更新: 20260506 文档类型: 架构设计说明书 阅读对象: 系统架构师、算法工程师、后端开发人员 1. 执行摘要 本文档描述了一个基于 API 级约束解码的 LLM 输出控制系统，该系统能够在文本生成过程中强制遵守 JSON Schema 规范。通过在模型推理的关键节点注入约束过滤器，系统实现了确定性结构化输出，同时保持推理性能开销在可接受范围内。 1.1 核心",
   "file": "notes/2.md"
  },
  {
   "id": 3,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/动态技能加载系统技术方案.md",
   "date": "2026-05-06",
   "title": "动态技能加载系统技术方案",
   "tags": [
-   "Agent",
-   "动态加载",
-   "Skills",
-   "Pydantic AI",
-   "技术方案"
+   ""
   ],
   "from": "动态技能加载系统技术方案",
-  "summary": "文档信息  内容 | ------|  v1.0 |  2026-04-27 |  Pydantic AI (>= v1.71.0) |  3.10+ | --- 一、背景与目标 1.1 业务背景 在实际的 AI Agent 应用中，存在以下典型需求： -…",
+  "summary": "文档信息 | 项目 | 内容 | ||| | 文档版本 | v1.0 | | 创建日期 | 20260427 | | 目标框架 | Pydantic AI = v1.71.0 | | Python 版本 | 3.10+ | 一、背景与目标 1.1 业务背景 在实际的 AI Agent 应用中，存在以下典型需求： 不同用户需要不同的能力集（会员等级、租户隔离） 能力需要热插拔，不能每次修改代码后重启",
   "file": "notes/3.md"
  },
  {
   "id": 4,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/安全沙箱技术/Landlock 技术详解：非特权文件系统沙箱.md",
   "date": "2026-06-12",
   "title": "Landlock 技术详解：非特权文件系统沙箱",
   "tags": [
-   "landlock",
-   "lsm",
-   "文件系统沙箱",
-   "rust",
-   "安全沙箱"
+   ""
   ],
   "from": "Landlock 技术详解：非特权文件系统沙箱",
-  "summary": "> Landlock 是 Linux 5.13+ 引入的安全模块，允许一个进程自己限制自己的文件系统访问权限——不需要 root、不需要特权、不需要额外配置。在你项目里已经通过 Rust  crate 启用了。 1. 一句话理解 seccomp 限制\"你能调用哪些…",
+  "summary": "Landlock 是 Linux 5.13+ 引入的安全模块，允许一个进程自己限制自己的文件系统访问权限——不需要 root、不需要特权、不需要额外配置。在你项目里已经通过 Rust landlock crate 启用了。 1. 一句话理解 seccomp 限制\"你能调用哪些 syscall\"，Landlock 限制\"你能访问哪些文件\"。两者都是进程自己给自己上的锁，但维度不同： 2. 为什么需要",
   "file": "notes/4.md"
  },
  {
   "id": 5,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/安全沙箱技术/nsjail + ossfs 技术方案总结.md",
   "date": "2026-04-23",
   "title": "nsjail + ossfs 技术方案总结",
   "tags": [
-   "nsjail",
-   "ossfs",
-   "安全沙箱",
-   "容器隔离",
-   "对象存储"
+   ""
   ],
   "from": "nsjail + ossfs 技术方案总结",
-  "summary": "1. 方案目标 - 在容器内提供“用户级隔离执行环境”（nsjail），用于安全运行命令/脚本。 - 通过 ossfs 将对象存储挂载为本地目录，供任务读写文件。 - 实现“系统代码与用户数据分离”：   - 系统脚本只读   - 用户工作区可写 - 支持多用户动态隔离（按 …",
+  "summary": "1. 方案目标 在容器内提供“用户级隔离执行环境”（nsjail），用于安全运行命令/脚本。 通过 ossfs 将对象存储挂载为本地目录，供任务读写文件。 实现“系统代码与用户数据分离”： 系统脚本只读 用户工作区可写 支持多用户动态隔离（按 username 划分目录）。 2. 总体架构 宿主机 / 容器内目录约定： 用户数据根：/srv/sandboxes/<username jail 内挂载",
   "file": "notes/5.md"
  },
  {
   "id": 6,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/安全沙箱技术/nsjail 技术详解：Linux Namespace 与进程隔离原理.md",
   "date": "2026-06-12",
   "title": "nsjail 技术详解：Linux Namespace 与进程隔离原理",
   "tags": [
-   "nsjail",
-   "linux-namespace",
-   "安全沙箱",
-   "进程隔离",
-   "容器技术"
+   ""
   ],
   "from": "nsjail 技术详解：Linux Namespace 与进程隔离原理",
-  "summary": "> 深入理解 Linux Namespace 机制，以及 nsjail 如何基于它构建仅次于虚拟机级别的进程隔离沙箱。 1. 为什么需要 Namespace？ 在 Linux 中，所有进程默认共享同一套\"全局资源视图\"：同一个进程 ID…",
+  "summary": "深入理解 Linux Namespace 机制，以及 nsjail 如何基于它构建仅次于虚拟机级别的进程隔离沙箱。 1. 为什么需要 Namespace？ 在 Linux 中，所有进程默认共享同一套\"全局资源视图\"：同一个进程 ID 空间、同一棵文件系统树、同一张网络接口表。这意味着一个进程可以： kill 掉别人的进程（共享 PID 空间） umount 掉别人的挂载点（共享 Mount 树） ",
   "file": "notes/6.md"
  },
  {
   "id": 7,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/安全沙箱技术/nsjail 监听模式完整技术文档.md",
   "date": "2026-05-22",
   "title": "nsjail 监听模式完整技术文档",
   "tags": [
-   "nsjail",
-   "监听模式",
-   "常驻沙箱",
-   "Docker",
-   "Python"
+   ""
   ],
   "from": "nsjail 监听模式完整技术文档",
-  "summary": "好的，这是一份关于 nsjail 监听模式的完整技术文档，包含从 Docker 配置到 Python 调用的全流程。 > 前置知识：nsjail 依赖 Linux Namespace 构建隔离环境，理解其原理有助于配置调优 → [[nsjail 技术详解：Linux…",
+  "summary": "好的，这是一份关于 nsjail 监听模式的完整技术文档，包含从 Docker 配置到 Python 调用的全流程。 前置知识：nsjail 依赖 Linux Namespace 构建隔离环境，理解其原理有助于配置调优 → nsjail 技术详解：Linux Namespace 与进程隔离原理 常驻沙箱：一次初始化，反复执行命令 目录 1. 背景与目标1背景与目标 2. 核心概念解释2核心概念解释",
   "file": "notes/7.md"
  },
  {
   "id": 8,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/安全沙箱技术/seccomp-bpf 技术详解：系统调用过滤原理与实践.md",
   "date": "2026-06-12",
   "title": "seccomp-bpf 技术详解：系统调用过滤原理与实践",
   "tags": [
-   "seccomp",
-   "bpf",
-   "系统调用过滤",
-   "安全沙箱",
-   "nsjail"
+   ""
   ],
   "from": "seccomp-bpf 技术详解：系统调用过滤原理与实践",
-  "summary": "> seccomp-bpf 是 Linux 内核提供的系统调用防火墙。如果说 Namespace 限制了\"你能看到什么\"，那 seccomp 限制了\"你能做什么\"。 1. 一句话理解 进程运行在用户态，任何底层操作（读写文件、创建进程、开网络连接）最终都要通过…",
+  "summary": "seccompbpf 是 Linux 内核提供的系统调用防火墙。如果说 Namespace 限制了\"你能看到什么\"，那 seccomp 限制了\"你能做什么\"。 1. 一句话理解 进程运行在用户态，任何底层操作（读写文件、创建进程、开网络连接）最终都要通过 系统调用（syscall） 进入内核态完成。Linux 有 400+ 个 syscall，但一个正常程序只需要其中很小一部分。 seccompb",
   "file": "notes/8.md"
  },
  {
   "id": 9,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/安全沙箱技术/内网沙箱网络隔离技术文档.md",
   "date": "2026-05-25",
   "title": "内网沙箱网络隔离技术文档",
   "tags": [
-   "沙箱",
-   "网络隔离",
-   "nftables",
-   "网络命名空间",
-   "HTTP代理"
+   ""
   ],
   "from": "内网沙箱网络隔离技术文档",
-  "summary": "1. 概述    的  子命令以沙箱方式执行 Python 代码。为了安全地允许代码访问外部网络(如 API 调用、包下载等),同时限制其对内网和敏感 IP 段的访问,系统通过 网络命名空间(namespace) + nftables + HTTP 代理 三层机制实现网络隔离。…",
+  "summary": "1. 概述 starmerxfileio 的 runcode 子命令以沙箱方式执行 Python 代码。为了安全地允许代码访问外部网络如 API 调用、包下载等,同时限制其对内网和敏感 IP 段的访问,系统通过 网络命名空间namespace + nftables + HTTP 代理 三层机制实现网络隔离。 关于三层架构的分工原理（为什么需要三层、每层解决什么问题）→ 网络隔离三层架构：netns",
   "file": "notes/9.md"
  },
  {
   "id": 10,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/安全沙箱技术/网络隔离三层架构：netns + nftables + HTTP 代理.md",
   "date": "2026-06-12",
   "title": "网络隔离三层架构：netns + nftables + HTTP 代理",
   "tags": [
-   "网络隔离",
-   "网络命名空间",
-   "nftables",
-   "HTTP代理",
-   "安全沙箱"
+   ""
   ],
   "from": "网络隔离三层架构：netns + nftables + HTTP 代理",
-  "summary": "> 从零解释：为什么需要三层？每层解决什么问题？它们怎么协作？ > 前置概念：eth0、lo、veth pair 等网络接口基础 → [[Linux 网络接口基础：eth0、lo、veth pair]] 0. 从一个具体场景出发 AI Agent 生成了一段 Python…",
+  "summary": "从零解释：为什么需要三层？每层解决什么问题？它们怎么协作？ 前置概念：eth0、lo、veth pair 等网络接口基础 → Linux 网络接口基础：eth0、lo、veth pair 0. 从一个具体场景出发 AI Agent 生成了一段 Python 代码，需要在你服务器上执行： 你不能信任这段代码。它应该能访问外网（下载依赖包），但绝对不能碰内网。怎么办？ 1. 第一层：网络命名空间 — ",
   "file": "notes/10.md"
  },
  {
   "id": 11,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/异步任务/Redis Streams 会话消息方案技术文档.md",
   "date": "2026-04-24",
   "title": "Redis Streams 会话消息方案技术文档",
   "tags": [
-   "Redis",
-   "Streams",
-   "会话消息",
-   "消息队列",
-   "高并发"
+   ""
   ],
   "from": "Redis Streams 会话消息方案技术文档",
-  "summary": "文档信息  内容 | ------|  v1.1 |  2026-01-23 |  对话消息系统（区分 sessionId / chatId，要求顺序） |  Redis 8.6 + Streams + Consumer Group |  ≥ 5.0（推荐 8.6+） |…",
+  "summary": "文档信息 | 项目 | 内容 | ||| | 文档版本 | v1.1 | | 更新日期 | 20260123 | | 适用场景 | 对话消息系统（区分 sessionId / chatId，要求顺序） | | 推荐方案 | Redis 8.6 + Streams + Consumer Group | | Redis 版本要求 | ≥ 5.0（推荐 8.6+） | 1. 背景与需求 1.1 业务场景",
   "file": "notes/11.md"
  },
  {
   "id": 12,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/异步任务/RocketMQ实现服务级会话并发.md",
   "date": "2026-04-24",
   "title": "RocketMQ实现服务级会话并发",
   "tags": [
-   "RocketMQ",
-   "消息中间件",
-   "会话并发",
-   "顺序消息",
-   "选型对比"
+   ""
   ],
   "from": "RocketMQ实现服务级会话并发",
-  "summary": "对话消息中间件选型与实现方案 文档信息  内容 | ------|  v2.0 |  2026-01-23 |  对话消息系统（区分 sessionId / chatId，要求顺序） |  RocketMQ 5.x LiteTopic | --- 1. 背景与需求 1.1…",
+  "summary": "对话消息中间件选型与实现方案 文档信息 | 项目 | 内容 | ||| | 文档版本 | v2.0 | | 更新日期 | 20260123 | | 适用场景 | 对话消息系统（区分 sessionId / chatId，要求顺序） | | 推荐方案 | RocketMQ 5.x LiteTopic | 1. 背景与需求 1.1 业务场景 对话消息系统，需要处理区分 sessionId（会话级标识）",
   "file": "notes/12.md"
  },
  {
   "id": 13,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/异步任务/主流异步任务框架选型对比分析.md",
   "date": "2026-06-08",
   "title": "主流异步任务框架选型对比分析",
   "tags": [
-   "异步任务",
-   "Celery",
-   "Temporal",
-   "Prefect",
-   "框架选型"
+   ""
   ],
   "from": "主流异步任务框架选型对比分析",
-  "summary": "主流异步任务框架选型对比分析  内容 |  :--- |  3.0 |  2026 年 6 月 8 日 |  Temporal 依赖信息已更正；Prefect 数据库支持已补充 |  架构师、技术负责人、后端开发工程师 | --- 1. 摘要…",
+  "summary": "主流异步任务框架选型对比分析 | 字段 | 内容 | | : | : | | 文档版本 | 3.0 | | 更新日期 | 2026 年 6 月 8 日 | | 主要修正 | Temporal 依赖信息已更正；Prefect 数据库支持已补充 | | 目标受众 | 架构师、技术负责人、后端开发工程师 | 1. 摘要 本文档对比分析四个分布式异步任务处理框架：Celery（经典任务队列）、Prefec",
   "file": "notes/13.md"
  },
  {
   "id": 14,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/异步任务/工作流引擎Temporal学习笔记.md",
   "date": "2026-03-20",
   "title": "工作流引擎Temporal学习笔记",
   "tags": [
-   "Temporal",
-   "工作流引擎",
-   "编排",
-   "分布式系统",
-   "微服务"
+   ""
   ],
   "from": "工作流引擎Temporal学习笔记",
-  "summary": "- 来源: https://code2life.top/blog/0070-temporal-notes - 抓取时间: 2026-03-20 目录 - 目录 - Temporal简介 - 5分钟上手Temporal - 实践与思考 Temporal简介…",
+  "summary": "来源: https://code2life.top/blog/0070temporalnotes 抓取时间: 20260320 目录 目录目录 Temporal简介temporal简介 5分钟上手Temporal5分钟上手temporal 实践与思考实践与思考 Temporal简介 Temporal是一个新兴的分布式工作流引擎。如果你在工作中遇到过以下这些场景，都可以来了解一下Temporal这个",
   "file": "notes/14.md"
  },
  {
   "id": 15,
-  "room": "wenyuan",
+  "room": "Agent",
+  "path": "Agent/Agent工程化/计划文件落地方案设计文档.md",
   "date": "2026-05-06",
   "title": "计划文件落地方案设计文档",
   "tags": [
-   "Agent",
-   "计划执行",
-   "设计文档",
-   "会话管理",
-   "断点恢复"
+   ""
   ],
   "from": "计划文件落地方案设计文档",
-  "summary": "一、概述 1.1 背景 当前Agent已具备Agent工作目录、Session工作目录、用户工作目录下的文件读写能力。需要在此基础上设计计划文件的落地方案，使Agent能够“先规划、后执行”，并在执行过程中严格遵循已确认的计划。 1.2 设计目标 -…",
+  "summary": "一、概述 1.1 背景 当前Agent已具备Agent工作目录、Session工作目录、用户工作目录下的文件读写能力。需要在此基础上设计计划文件的落地方案，使Agent能够“先规划、后执行”，并在执行过程中严格遵循已确认的计划。 1.2 设计目标 Agent接到任务后，先生成计划供用户审阅，经确认后方可执行 执行过程严格按照计划步骤顺序进行，不允许自行偏离 支持会话中断后的断点恢复 计划严格绑定会",
   "file": "notes/15.md"
  },
  {
   "id": 16,
-  "room": "shiyi",
+  "room": "Agent",
+  "path": "Agent/Agent概述.md",
   "date": "2026-06-10",
   "title": "Agent概述",
   "tags": [
-   "agent",
-   "路线图",
-   "工程化",
-   "安全沙箱"
+   ""
   ],
   "from": "Agent概述",
-  "summary": "什么是 Agent Agent（智能体）不是单一模型，而是一个由 LLM 驱动的自主系统——它能感知环境、制定计划、调用工具、在循环中反思与修正，最终完成目标。 与传统的\"输入→输出\"式 LLM 调用不同，Agent 的核心差异在于 自主决策循环（Agentic…",
+  "summary": "什么是 Agent Agent（智能体）不是单一模型，而是一个由 LLM 驱动的自主系统——它能感知环境、制定计划、调用工具、在循环中反思与修正，最终完成目标。 与传统的\"输入→输出\"式 LLM 调用不同，Agent 的核心差异在于 自主决策循环（Agentic Loop）：模型不再是一次性给出答案，而是像人一样\"思考 → 行动 → 观察 → 再思考\"，在迭代中逼近目标。 Agent 核心能力模块",
   "file": "notes/16.md"
  },
  {
   "id": 17,
-  "room": "shiyi",
+  "room": "Agent",
+  "path": "Agent/OpenClaw概述.md",
   "date": "2026-03-10",
   "title": "OpenClaw概述",
   "tags": [
-   "OpenClaw",
-   "AI代理",
-   "网关",
-   "自动化",
-   "本地优先"
+   ""
   ],
   "from": "OpenClaw概述",
-  "summary": "一、功能特性 > OpenClaw能做什么 OpenClaw是一款开源子托管的AI代理网关。本质是运行在用户自由设备上的自主式智能助手，主打“本地优先，隐私可控”的设计理念。通过自然语言指令实现PC全功能自动化，真正做到替用户做事。…",
+  "summary": "一、功能特性 OpenClaw能做什么 OpenClaw是一款开源子托管的AI代理网关。本质是运行在用户自由设备上的自主式智能助手，主打“本地优先，隐私可控”的设计理念。通过自然语言指令实现PC全功能自动化，真正做到替用户做事。 与云端聊天机器人不同，OpenClaw持续运行在用户自有硬件（比如Mac Mini以及各种PC设备上），执行shell命令、管理文件、并协调多步骤工作流程，无需人工审核。",
   "file": "notes/17.md"
  },
  {
   "id": 18,
-  "room": "guanxing",
+  "room": "Agent",
+  "path": "Agent/世界模型-空间智能-学习路线.md",
   "date": "2026-07-07",
   "title": "世界模型（空间智能流派）学习路线",
-  "tags": [],
+  "tags": [
+   "世界模型",
+   "空间智能",
+   "学习路线",
+   "硕士",
+   "AI"
+  ],
   "from": "世界模型-空间智能-学习路线",
-  "summary": "世界模型（空间智能流派）学习路线 > 目标：以获取人工智能硕士学位为导向，系统掌握世界模型-空间智能流派的知识体系。 > 核心人物与机构：李飞飞 (Fei-Fei Li) / World Labs、Yann LeCun / AMI Labs ---…",
+  "summary": "世界模型（空间智能流派）学习路线 目标：以获取人工智能硕士学位为导向，系统掌握世界模型空间智能流派的知识体系。 核心人物与机构：李飞飞 FeiFei Li / World Labs、Yann LeCun / AMI Labs 零、理解这个方向：什么是「空间智能」与「世界模型」？ 在开始学习之前，先建立全局认知： 空间智能 Spatial Intelligence 空间智能是李飞飞提出的 AI 下一",
   "file": "notes/18.md"
  },
  {
   "id": 19,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/协议簇/Agent Client Protocol 详解.md",
   "date": "2026-06-16",
   "title": "Agent Client Protocol (ACP) 详解",
   "tags": [
-   "ACP",
-   "协议",
-   "AI Agent",
-   "编辑器",
-   "JSON-RPC",
-   "JetBrains"
+   ""
   ],
   "from": "Agent Client Protocol 详解",
-  "summary": "1. 背景：编辑器与 Coding Agent 的集成碎片化 1.1 问题描述 2024-2025 年，AI Coding Agent 迎来爆发式增长。Claude Code、Cursor、GitHub Copilot、Cody、Continue、Aider 等大量 Agent…",
+  "summary": "1. 背景：编辑器与 Coding Agent 的集成碎片化 1.1 问题描述 20242025 年，AI Coding Agent 迎来爆发式增长。Claude Code、Cursor、GitHub Copilot、Cody、Continue、Aider 等大量 Agent 涌现，它们需要与 VS Code、JetBrains IDE、Zed、Neovim 等各种编辑器集成。 问题随之而来： 每",
   "file": "notes/19.md"
  },
  {
   "id": 20,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/协议簇/JSON-RPC 协议详解.md",
   "date": "2026-06-16",
   "title": "JSON-RPC 协议详解",
   "tags": [
-   "JSON-RPC",
-   "协议",
-   "RPC",
-   "JSON"
+   ""
   ],
   "from": "JSON-RPC 协议详解",
-  "summary": "1. 为什么需要 JSON-RPC？ 1.1 RPC 的核心思想 RPC (Remote Procedure Call，远程过程调用) 的核心思想很简单：像调用本地函数一样调用远程服务。 要实现远程调用，需要解决三个问题： 1. 怎么传：数据如何编码（序列化） 2.…",
+  "summary": "1. 为什么需要 JSONRPC？ 1.1 RPC 的核心思想 RPC Remote Procedure Call，远程过程调用 的核心思想很简单：像调用本地函数一样调用远程服务。 要实现远程调用，需要解决三个问题： 1. 怎么传：数据如何编码（序列化） 2. 传什么：怎么指定调用哪个方法、传什么参数 3. 协议无关：不绑定特定传输方式（HTTP、WebSocket、stdio 都应该能用） 1.",
   "file": "notes/20.md"
  },
  {
   "id": 21,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/协议簇/Language Server Protocol 详解.md",
   "date": "2026-06-16",
   "title": "Language Server Protocol (LSP) 详解",
   "tags": [
-   "LSP",
-   "协议",
-   "编辑器",
-   "开发工具",
-   "JSON-RPC"
+   ""
   ],
   "from": "Language Server Protocol 详解",
-  "summary": "1. 背景：编辑器碎片化问题 1.1 在 LSP 出现之前 假设市面上有 M 种编程语言（Python、Go、Rust、TypeScript...）和 N 种编辑器/IDE（VS Code、Vim、Emacs、Sublime…",
+  "summary": "1. 背景：编辑器碎片化问题 1.1 在 LSP 出现之前 假设市面上有 M 种编程语言（Python、Go、Rust、TypeScript...）和 N 种编辑器/IDE（VS Code、Vim、Emacs、Sublime Text、JetBrains...）。每个编辑器想要支持每种语言的智能功能（自动补全、跳转定义、错误提示等），都需要为每种语言单独实现一套逻辑。 这就是经典的 M × N 问",
   "file": "notes/21.md"
  },
  {
   "id": 22,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/协议簇/Model Context Protocol 详解.md",
   "date": "2026-06-16",
   "title": "Model Context Protocol (MCP) 详解",
   "tags": [
-   "MCP",
-   "协议",
-   "AI Agent",
-   "JSON-RPC",
-   "LLM"
+   ""
   ],
   "from": "Model Context Protocol 详解",
-  "summary": "1. 背景：LLM 的「信息孤岛」问题 1.1 问题描述 大语言模型（LLM）本身是一个封闭系统。它能回答问题，但知识截止于训练数据。当 AI 应用需要访问外部数据（数据库、API、文件系统、第三方服务）时，传统做法是每个应用各自实现一套集成代码。 这就产生了类似 LSP…",
+  "summary": "1. 背景：LLM 的「信息孤岛」问题 1.1 问题描述 大语言模型（LLM）本身是一个封闭系统。它能回答问题，但知识截止于训练数据。当 AI 应用需要访问外部数据（数据库、API、文件系统、第三方服务）时，传统做法是每个应用各自实现一套集成代码。 这就产生了类似 LSP 诞生前的 M×N 问题： 1.2 MCP 的解决方案 MCP 由 Anthropic 于 2024 年底推出，核心理念直接继承",
   "file": "notes/22.md"
  },
  {
   "id": 23,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/协议簇/PyCharm 远程开发方式详解.md",
   "date": "2026-06-16",
   "title": "PyCharm 远程开发方式详解",
   "tags": [
-   "PyCharm",
-   "远程开发",
-   "SSH",
-   "Docker",
-   "JetBrains"
+   ""
   ],
   "from": "PyCharm 远程开发方式详解",
-  "summary": "1. 概述 PyCharm 是 JetBrains 出品的 Python IDE，提供了多种远程开发方式，适用于不同的场景。远程开发的核心价值在于： - 代码在远程：源码存储在服务器/容器中，本地不需要完整的环境 - 运行在远程：Python 解释器、依赖包、GPU…",
+  "summary": "1. 概述 PyCharm 是 JetBrains 出品的 Python IDE，提供了多种远程开发方式，适用于不同的场景。远程开发的核心价值在于： 代码在远程：源码存储在服务器/容器中，本地不需要完整的环境 运行在远程：Python 解释器、依赖包、GPU 等资源都在远端 编辑在本地：享受本地 IDE 的流畅交互体验 PyCharm 支持以下几种远程开发方式，本文将逐一详解： 版本要求：方式①②",
   "file": "notes/23.md"
  },
  {
   "id": 24,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/协议簇/Server-Sent Events 详解.md",
   "date": "2026-06-16",
   "title": "Server-Sent Events (SSE) 详解",
   "tags": [
-   "SSE",
-   "HTTP",
-   "协议",
-   "实时通信",
-   "MCP"
+   ""
   ],
   "from": "Server-Sent Events 详解",
-  "summary": "1. 背景：HTTP 的「单向请求」局限 1.1 HTTP 的天然短板 HTTP 协议本质上是一个请求-响应模型——客户端发起请求，服务端返回响应，然后连接结束。服务端无法主动向客户端推送数据。 这对实时场景（股票行情、消息通知、AI 流式输出）是致命限制。 1.2…",
+  "summary": "1. 背景：HTTP 的「单向请求」局限 1.1 HTTP 的天然短板 HTTP 协议本质上是一个请求响应模型——客户端发起请求，服务端返回响应，然后连接结束。服务端无法主动向客户端推送数据。 这对实时场景（股票行情、消息通知、AI 流式输出）是致命限制。 1.2 传统解决方案的不足 在 SSE 出现之前，几种方案的局限： | 方案 | 原理 | 缺点 | |||| | 短轮询 | 客户端定时发 ",
   "file": "notes/24.md"
  },
  {
   "id": 25,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/协议簇/Streamable HTTP 详解.md",
   "date": "2026-06-16",
   "title": "Streamable HTTP 详解（MCP 新一代传输协议）",
   "tags": [
-   "Streamable HTTP",
-   "MCP",
-   "协议",
-   "HTTP",
-   "SSE"
+   ""
   ],
   "from": "Streamable HTTP 详解",
-  "summary": "1. 背景：HTTP+SSE 的时代局限 1.1 MCP 初代远程传输 在 MCP 协议 2024-11-05 版本中，远程通信使用 HTTP + SSE 方案： 这个设计有三个致命缺陷：  后果 | ------|  SSE 断开后无法续传，上下文全部丢失 | …",
+  "summary": "1. 背景：HTTP+SSE 的时代局限 1.1 MCP 初代远程传输 在 MCP 协议 20241105 版本中，远程通信使用 HTTP + SSE 方案： 这个设计有三个致命缺陷： | 缺陷 | 后果 | ||| | 连接不可恢复 | SSE 断开后无法续传，上下文全部丢失 | | 强制长连接 | 服务器必须维持高可用长连接，资源压力大 | | 双端点耦合 | /sse 和 /messages",
   "file": "notes/25.md"
  },
  {
   "id": 26,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/多Agent协同/Agent Memory综述_Memory in the Age of AI Agents.md",
   "date": "2025-06-23",
   "title": "论文综述：Memory in the Age of AI Agents — A Survey",
   "tags": [
@@ -421,12 +355,13 @@
    "Forms-Functions-Dynamics"
   ],
   "from": "Agent Memory综述_Memory in the Age of AI Agents",
-  "summary": "论文信息 - 标题：Memory in the Age of AI Agents: A Survey - 作者：Yuyang Hu, Shichun Liu, Yanwei Yue, Guibin Zhang 等（新加坡国立大学、中国人民大学、复旦大学、北京大学等 10+…",
+  "summary": "论文信息 标题：Memory in the Age of AI Agents: A Survey 作者：Yuyang Hu, Shichun Liu, Yanwei Yue, Guibin Zhang 等（新加坡国立大学、中国人民大学、复旦大学、北京大学等 10+ 机构联合） arXiv：2512.13564https://arxiv.org/abs/2512.13564 页数：107 页（正文 ",
   "file": "notes/26.md"
  },
  {
   "id": 27,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/多Agent协同/P-t-E架构综述_Architecting Resilient LLM Agents.md",
   "date": "2025-06-22",
   "title": "论文综述：Architecting Resilient LLM Agents — A Guide to Secure Plan-then-Execute Implementations",
   "tags": [
@@ -437,171 +372,177 @@
    "综述"
   ],
   "from": "P-t-E架构综述_Architecting Resilient LLM Agents",
-  "summary": "论文信息 - 标题：Architecting Resilient LLM Agents: A Guide to Secure Plan-then-Execute Implementations - 作者：Ron F. Del Rosario (SAP), Klaudia…",
+  "summary": "论文信息 标题：Architecting Resilient LLM Agents: A Guide to Secure PlanthenExecute Implementations 作者：Ron F. Del Rosario SAP, Klaudia Krawiecka ACM, Christian Schroeder de Witt University of Oxford arXiv：25",
   "file": "notes/27.md"
  },
  {
   "id": 28,
-  "room": "tongdian",
+  "room": "Agent",
+  "path": "Agent/多Agent协同/多智能体拓扑结构与动态自适应.md",
   "date": "2026-06-22",
   "title": "多智能体拓扑结构与动态自适应",
   "tags": [
-   "多智能体系统",
-   "拓扑结构",
-   "编排架构",
-   "通信协议"
+   ""
   ],
   "from": "多智能体拓扑结构与动态自适应",
-  "summary": "多智能体拓扑结构与动态自适应 > 参考文献：The Orchestration of Multi-Agent Systems: Architectures, Protocols, and Enterprise Adoption > 参考文献：LLM-Based…",
+  "summary": "多智能体拓扑结构与动态自适应 参考文献：The Orchestration of MultiAgent Systems: Architectures, Protocols, and Enterprise Adoptionhttps://arxiv.org/html/2601.13671v1 参考文献：LLMBased MultiAgent Orchestration: A Survey of Fr",
   "file": "notes/28.md"
  },
  {
   "id": 29,
-  "room": "guanxing",
+  "room": "人工智能基础",
+  "path": "人工智能基础/VLA视觉语言动作模型.md",
   "date": "2026-06-17",
   "title": "VLA（Vision-Language-Action）视觉-语言-动作模型",
   "tags": [
-   "人工智能基础",
-   "具身智能",
-   "多模态",
-   "机器人",
-   "大模型"
+   ""
   ],
   "from": "VLA视觉语言动作模型",
-  "summary": "VLA（Vision-Language-Action）视觉-语言-动作模型 一句话定义 > VLA 是让机器人\"看懂、听懂、做到\"的端到端模型——将视觉感知、自然语言理解和动作控制统一在同一框架，实现从感知直接到执行的一体化闭环。 在更早的多模态栈中，功能的边界划分曾是：…",
+  "summary": "VLA（VisionLanguageAction）视觉语言动作模型 一句话定义 VLA 是让机器人\"看懂、听懂、做到\"的端到端模型——将视觉感知、自然语言理解和动作控制统一在同一框架，实现从感知直接到执行的一体化闭环。 在更早的多模态栈中，功能的边界划分曾是： VLA 的本质是在 VLM 的基础上加了一个\"动作头\"，将大模型的常识推理能力延伸到物理世界。 一、核心价值：打破模态边界 传统机器人系统",
   "file": "notes/29.md"
  },
  {
   "id": 30,
-  "room": "guanxing",
+  "room": "人工智能基础",
+  "path": "人工智能基础/世界模型/世界坐标系锚定原理.md",
   "date": "2026-07-06",
   "title": "世界坐标系锚定原理",
   "tags": [
-   "3D世界模型",
-   "坐标系",
-   "相机位姿",
-   "三维重建"
+   ""
   ],
   "from": "世界坐标系锚定原理",
-  "summary": "世界坐标系锚定原理 > 基于论文《Learning 3D Persistent Embodied World Models》中 3D 特征地图的构建机制。 --- 核心问题 多个不同的观测视角（相机在不同时间、不同位置拍到的 RGB-D…",
+  "summary": "世界坐标系锚定原理 基于论文《Learning 3D Persistent Embodied World Models》中 3D 特征地图的构建机制。 核心问题 多个不同的观测视角（相机在不同时间、不同位置拍到的 RGBD 帧），如何锚定到同一个世界坐标系下，拼成一张统一的 3D 地图？ 锚定方案：相机位姿 R, t 统一坐标 在 Habitat 仿真环境中，每一步都已知相机在世界坐标系中的精确位",
   "file": "notes/30.md"
  },
  {
   "id": 31,
-  "room": "guanxing",
+  "room": "人工智能基础",
+  "path": "人工智能基础/世界模型/世界模型.md",
   "date": "2026-06-17",
   "title": "世界模型（World Model）",
   "tags": [
-   "人工智能基础",
-   "深度学习",
-   "强化学习",
-   "生成模型",
-   "具身智能"
+   ""
   ],
   "from": "世界模型",
-  "summary": "世界模型（World Model） 一句话定义 > 让 AI 在行动前能预测后果、在\"脑中\"模拟\"如果……会怎样\"的系统。 任何世界模型都只是对世界的\"表征\"，不等同于世界本身。 世界模型目前没有统一的公认定义。2024…",
+  "summary": "世界模型（World Model） 一句话定义 让 AI 在行动前能预测后果、在\"脑中\"模拟\"如果……会怎样\"的系统。 任何世界模型都只是对世界的\"表征\"，不等同于世界本身。 世界模型目前没有统一的公认定义。2024 年后多篇综述公认该用法\"混乱\"和\"碎片化\"。四个流派在用四种不同的方式做四件不同的事，衡量标准各不相同。 一、概念的历史沿革 1.1 1943 年：心理学雏形 英国心理学家 Kenn",
   "file": "notes/31.md"
  },
  {
   "id": 32,
-  "room": "guanxing",
+  "room": "人工智能基础",
+  "path": "人工智能基础/世界模型/空间智能综述.md",
   "date": "2026-07-06",
   "title": "空间智能综述",
   "tags": [
-   "人工智能基础",
-   "空间智能",
-   "世界模型",
-   "3D生成",
-   "具身智能"
+   ""
   ],
   "from": "空间智能综述",
-  "summary": "空间智能综述 > 基于李飞飞 2024 TED 演讲《With Spatial Intelligence, AI Will Understand the Real World》及 2025 长文《From Words to Worlds: Spatial…",
+  "summary": "空间智能综述 基于李飞飞 2024 TED 演讲《With Spatial Intelligence, AI Will Understand the Real World》及 2025 长文《From Words to Worlds: Spatial Intelligence is AI's Next Frontier》 一、定义 空间智能（Spatial Intelligence）= 使机器能够",
   "file": "notes/32.md"
  },
  {
   "id": 33,
-  "room": "guanxing",
+  "room": "人工智能基础",
+  "path": "人工智能基础/世界模型/高斯泼溅概述.md",
   "date": "2026-07-06",
   "title": "高斯泼溅概述（Gaussian Splatting Overview）",
   "tags": [
-   "3D高斯泼溅",
-   "辐射场",
-   "计算机视觉",
-   "三维重建"
+   ""
   ],
   "from": "高斯泼溅概述",
-  "summary": "高斯泼溅概述（Gaussian Splatting Overview） > 翻译自 Splatter Image 论文 (CVPR 2024) §3.1 节，附详细公式解释。 --- 什么是辐射场 辐射场（Radiance…",
+  "summary": "高斯泼溅概述（Gaussian Splatting Overview） 翻译自 Splatter Image 论文 CVPR 2024 §3.1 节，附详细公式解释。 什么是辐射场 辐射场（Radiance Field）是一对函数，为每个三维点分配不透明度和颜色： $$ \\sigma\\boldsymbol{x} \\in \\mathbb{R}+ \\quad\\quad c\\boldsymbol{x},",
   "file": "notes/33.md"
  },
  {
   "id": 34,
-  "room": "guanxing",
-  "date": "2026",
+  "room": "人工智能基础",
+  "path": "人工智能基础/扩散模型/手推GaussianDiffusion公式.md",
+  "date": "",
   "title": "手推GaussianDiffusion公式",
   "tags": [],
   "from": "手推GaussianDiffusion公式",
-  "summary": "假设条件 1. 对于第 $t - 1$ 步的任意像素点 $x_{t-1}$ , 通过将均值缩放为 $\\sqrt{1 - \\beta_t}$ ，并添加 $\\beta_t$ 倍的高斯噪声 $\\epsilon \\sim \\mathcal{N}(0, I)$，则条件/转移概率分布满足：…",
+  "summary": "假设条件 1. 对于第 $t 1$ 步的任意像素点 $x{t1}$ , 通过将均值缩放为 $\\sqrt{1 \\betat}$ ，并添加 $\\betat$ 倍的高斯噪声 $\\epsilon \\sim \\mathcal{N}0, I$，则条件/转移概率分布满足： $$qxt \\mid x{t1} = \\mathcal{N}xt; \\sqrt{1 \\betat} xt, \\betat I$$ 2. 令 ",
   "file": "notes/34.md"
  },
  {
   "id": 35,
-  "room": "guanxing",
+  "room": "人工智能基础",
+  "path": "人工智能基础/扩散模型/扩散模型（DDPM）学习笔记.md",
   "date": "2026-07-13",
   "title": "扩散模型（DDPM）学习笔记",
   "tags": [
-   "扩散模型",
-   "DDPM",
-   "生成模型",
-   "深度学习"
+   ""
   ],
   "from": "扩散模型（DDPM）学习笔记",
-  "summary": "一、概述 扩散模型是一类生成模型，通过逐步去噪的方式将纯高斯噪声转化为高质量图像。它的核心思想源于热力学中的扩散过程，由 DDPM（Denoising Diffusion Probabilistic Models）论文系统化提出。 关键特点 - 稳定训练：不像 GAN…",
+  "summary": "一、概述 扩散模型是一类生成模型，通过逐步去噪的方式将纯高斯噪声转化为高质量图像。它的核心思想源于热力学中的扩散过程，由 DDPM（Denoising Diffusion Probabilistic Models）论文系统化提出。 关键特点 稳定训练：不像 GAN 需要对抗博弈，扩散模型仅通过简单的回归损失训练。 高多样性：生成图像覆盖完整数据分布，无模式崩塌问题。 可控性强：天然支持条件生成（文",
   "file": "notes/35.md"
  },
  {
   "id": 36,
-  "room": "shulizhai",
-  "date": "2026-07-07",
-  "title": "线性代数复习路线（机器学习前置）",
+  "room": "其他",
+  "path": "学习计划.md",
+  "date": "",
+  "title": "学习计划",
   "tags": [],
-  "from": "机器学习前置-复习路线",
-  "summary": "线性代数复习路线 · 机器学习前置版 > 诊断结论：有高等代数基础但大量概念和计算方法遗忘。目标为机器学习前置，偏好编程实现。 > 策略：不求面面俱到，聚焦 ML 高频刚需，每个模块「概念回顾 → 手算 → NumPy 实现 → 在 ML 中怎么用」四步闭环。 --- 阶段编排…",
+  "from": "学习计划",
+  "summary": "待学习 手推GaussianDiffusion公式 待复习 %% kanban:settings %%",
   "file": "notes/36.md"
  },
  {
   "id": 37,
-  "room": "shulizhai",
+  "room": "线性代数",
+  "path": "线性代数/机器学习前置-复习路线.md",
   "date": "2026-07-07",
-  "title": "第一周：向量空间与矩阵运算",
-  "tags": [],
-  "from": "第一周-向量空间与矩阵运算",
-  "summary": "第一周：向量空间与矩阵运算 > 目标：把向量、矩阵的几何直觉建立起来，重新理解线性相关、秩、子空间这三个核心概念。 --- Day 1：向量的几何意义 学什么 核心概念： - 向量不只是数字串，它是空间中的一个箭头（或一个点） - 向量的两种基本运算：加法（平移 +…",
+  "title": "线性代数复习路线（机器学习前置）",
+  "tags": [
+   "线性代数",
+   "学习路线",
+   "机器学习"
+  ],
+  "from": "机器学习前置-复习路线",
+  "summary": "线性代数复习路线 · 机器学习前置版 诊断结论：有高等代数基础但大量概念和计算方法遗忘。目标为机器学习前置，偏好编程实现。 策略：不求面面俱到，聚焦 ML 高频刚需，每个模块「概念回顾 → 手算 → NumPy 实现 → 在 ML 中怎么用」四步闭环。 阶段编排 第一周：向量空间与矩阵运算 对应诊断：题1 ✅ → 题2 ⚠️ → 题9 ❌（秩的概念） Day 12：向量与空间直觉 | 要搞懂的事 ",
   "file": "notes/37.md"
  },
  {
   "id": 38,
-  "room": "shulizhai",
+  "room": "线性代数",
+  "path": "线性代数/第一周-向量空间与矩阵运算.md",
   "date": "2026-07-07",
-  "title": "线性代数诊断测试",
-  "tags": [],
-  "from": "诊断测试",
-  "summary": "线性代数 · 诊断测试 下面有 10 道题目，覆盖线性代数的核心模块。请根据你的现有水平作答——能做多少做多少，写不出完整答案也可以写思路。目的是摸清你的起点，不是考试。 --- 模块一：矩阵与向量基础 > 1. 已知矩阵 $A = \\begin{pmatrix} 1 & 2…",
+  "title": "第一周：向量空间与矩阵运算",
+  "tags": [
+   "线性代数",
+   "学习笔记",
+   "第一周"
+  ],
+  "from": "第一周-向量空间与矩阵运算",
+  "summary": "第一周：向量空间与矩阵运算 目标：把向量、矩阵的几何直觉建立起来，重新理解线性相关、秩、子空间这三个核心概念。 Day 1：向量的几何意义 学什么 核心概念： 向量不只是数字串，它是空间中的一个箭头（或一个点） 向量的两种基本运算：加法（平移 + 首尾相接）、数乘（拉伸 / 压缩 / 翻转） 向量的模（长度）$||\\mathbf{v}|| = \\sqrt{v1^2 + v2^2 + \\dots}$",
   "file": "notes/38.md"
  },
  {
   "id": 39,
-  "room": "shiyi",
+  "room": "线性代数",
+  "path": "线性代数/诊断测试.md",
+  "date": "2026-07-07",
+  "title": "线性代数诊断测试",
+  "tags": [
+   "线性代数",
+   "测试"
+  ],
+  "from": "诊断测试",
+  "summary": "线性代数 · 诊断测试 下面有 10 道题目，覆盖线性代数的核心模块。请根据你的现有水平作答——能做多少做多少，写不出完整答案也可以写思路。目的是摸清你的起点，不是考试。 模块一：矩阵与向量基础 1. 已知矩阵 $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$，$B = \\begin{pmatrix} 2 & 0 \\\\ 1 & 1 \\end{pm",
+  "file": "notes/39.md"
+ },
+ {
+  "id": 40,
+  "room": "网络工程",
+  "path": "网络工程/Linux 网络接口基础：eth0、lo、veth pair.md",
   "date": "2026-06-12",
   "title": "Linux 网络接口基础：eth0、lo、veth pair",
   "tags": [
-   "网络",
-   "linux",
-   "veth",
-   "网络接口",
-   "容器网络"
+   ""
   ],
   "from": "Linux 网络接口基础：eth0、lo、veth pair",
-  "summary": "> 理解沙箱网络隔离的前置知识。这些是 Linux 中最常见的网络接口类型，你的 netns + nftables 方案全程依赖它们。 1. eth0 — 物理网卡 eth0 是你电脑对外通信的物理出口。…",
-  "file": "notes/39.md"
+  "summary": "理解沙箱网络隔离的前置知识。这些是 Linux 中最常见的网络接口类型，你的 netns + nftables 方案全程依赖它们。 1. eth0 — 物理网卡 eth0 是你电脑对外通信的物理出口。 就像你家的门牌号——别人要寄快递给你，得写这个地址；你要出去，也得从这个门走。 | 属性 | 说明 | ||| | 全称 | Ethernet Interface 0（第一个以太网接口） | | 本",
+  "file": "notes/40.md"
  }
 ]
