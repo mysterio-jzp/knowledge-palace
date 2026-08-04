@@ -475,7 +475,7 @@ function openArticle(id){
   document.getElementById('aMeta').textContent = '收藏于 '+item.date+' · '+item.from;
   document.getElementById('aTags').innerHTML = item.tags.map(function(t){ return '<i>'+esc(t)+'</i>'; }).join('');
   document.getElementById('aBody').innerHTML = md2html(item.content);
-  window.scrollTo(0,0);
+  document.getElementById('articlePage').scrollIntoView({ behavior: 'smooth', block: 'start' });
   window.location.hash = 'article/'+id;
 }
 
