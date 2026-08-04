@@ -122,9 +122,9 @@ main{position:relative;z-index:2}
 /* ---------- library ---------- */
 .library{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:5.5rem 1.5rem 4rem}
 .stats{display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
-.stat{text-align:center}
-.stat b{display:block;font-family:var(--latin);font-size:2.4rem;color:var(--gold-bright);font-weight:500;line-height:1}
-.stat span{font-size:.78rem;letter-spacing:.4em;padding-left:.4em;color:var(--paper-dim)}
+.stat,.stat-item{text-align:center}
+.stat b,.stat-item .num{display:block;font-family:var(--latin);font-size:2.4rem;color:var(--gold-bright);font-weight:500;line-height:1}
+.stat span,.stat-item .label{font-size:.78rem;letter-spacing:.4em;padding-left:.4em;color:var(--paper-dim)}
 
 .tabs{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-bottom:2rem}
 .tab{
@@ -146,20 +146,20 @@ main{position:relative;z-index:2}
   background:var(--cinnabar);color:#f7ead8;font-family:var(--latin);font-size:.7rem;font-style:normal;
 }
 
-.toolbar{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
-.search{
+.toolbar,.actions{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem;align-items:stretch}
+.search,.search-input{
   width:min(430px,100%);background:var(--ink-2);border:1px solid rgba(211,169,95,.25);
   color:var(--paper);font-family:var(--serif);font-size:.95rem;letter-spacing:.1em;
-  padding:.7rem 1.1rem;outline:none;transition:all .3s;
+  padding:.7rem 1.1rem;outline:none;transition:all .3s;line-height:1.5;min-height:44px;
 }
-.search:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(211,169,95,.12)}
-.search::placeholder{color:rgba(239,230,208,.3)}
-.btn{
+.search:focus,.search-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(211,169,95,.12)}
+.search::placeholder,.search-input::placeholder{color:rgba(239,230,208,.3)}
+.btn,.random-btn{
   cursor:pointer;border:1px solid var(--gold-dim);background:transparent;color:var(--gold);
   font-family:var(--serif);letter-spacing:.2em;font-size:.88rem;padding:.7rem 1.3rem;
-  transition:all .3s;
+  transition:all .3s;line-height:1.5;min-height:44px;
 }
-.btn:hover{background:var(--gold);color:#241a08;box-shadow:0 6px 20px rgba(211,169,95,.3)}
+.btn:hover,.random-btn:hover{background:var(--gold);color:#241a08;box-shadow:0 6px 20px rgba(211,169,95,.3)}
 
 /* spotlight */
 .spotlight{
