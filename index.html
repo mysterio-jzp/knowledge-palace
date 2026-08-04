@@ -277,6 +277,14 @@ footer .copy{margin-top:2.6rem;color:rgba(239,230,208,.28);font-size:.78rem;lett
 .article-body code{font-family:var(--mono);font-size:.88em;background:rgba(211,169,95,.1);color:var(--gold-bright);padding:.15em .4em;border-radius:3px}
 .article-body pre{background:var(--ink-2);border:1px solid rgba(211,169,95,.16);border-radius:6px;padding:1.2em 1.4em;margin:1.4em 0;overflow-x:auto;line-height:1.65}
 .article-body pre code{background:none;color:var(--paper-dim);padding:0;font-size:.85em}
+.article-body .code-block{margin:1.5em 0;border:1px solid rgba(211,169,95,.2);border-radius:9px;overflow:hidden;background:var(--ink-2);box-shadow:0 4px 18px rgba(0,0,0,.25)}
+.article-body .code-head{display:flex;align-items:center;justify-content:space-between;padding:.5em .95em;background:linear-gradient(180deg,rgba(211,169,95,.13),rgba(211,169,95,.05));border-bottom:1px solid rgba(211,169,95,.2)}
+.article-body .code-lang{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-bright);opacity:.9}
+.article-body .copy-btn{font-family:var(--sans);font-size:.72rem;color:var(--paper-dim);background:rgba(0,0,0,.22);border:1px solid rgba(211,169,95,.28);border-radius:5px;padding:.25em .7em;cursor:pointer;transition:all .2s}
+.article-body .copy-btn:hover{color:var(--gold-bright);border-color:var(--gold-bright)}
+.article-body .copy-btn.copied{color:#7ec699;border-color:#7ec699}
+.article-body .code-block pre{margin:0;background:none;border:none;border-radius:0;padding:1.15em 1.3em;overflow-x:auto;line-height:1.68}
+.article-body .code-block pre code{background:none;color:var(--paper);padding:0;font-size:.85em}
 .article-body table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:.92em}
 .article-body th,.article-body td{border:1px solid rgba(211,169,95,.18);padding:.6em .9em;text-align:left}
 .article-body th{background:rgba(211,169,95,.1);color:var(--gold-bright);font-weight:900;letter-spacing:.05em}
@@ -376,9 +384,15 @@ function md2html(md) {
     var label = (parts[1] || parts[0]).trim();
     return '<span class="wikilink">' + esc(label) + '</span>';
   });
-  // Fenced code blocks
+  // Fenced code blocks — use a placeholder so inner code is never re-parsed as markdown
+  var codeBlocks = [];
   html = html.replace(/```(\w*)\n([\s\S]*?)```/g, function(_, lang, code) {
-    return '<pre><code>' + esc(code.trim()) + '</code></pre>';
+    var l = lang ? lang : 'text';
+    var block = '<div class="code-block"><div class="code-head"><span class="code-lang">' + esc(l) +
+      '</span><button class="copy-btn" type="button">复制</button></div><pre><code>' +
+      esc(code.trim()) + '</code></pre></div>';
+    codeBlocks.push(block);
+    return '\n%%CODEBLOCK' + (codeBlocks.length - 1) + '%%\n';
   });
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
@@ -405,6 +419,7 @@ function md2html(md) {
       if (inTable) { out.push('</table>'); inTable = false; }
       out.push(''); continue;
     }
+    if (t.indexOf('%%CODEBLOCK') === 0) { out.push(t); continue; }
     if (t.startsWith('<h') || t.startsWith('<pre') || t.startsWith('<blockquote') || t.startsWith('<hr') || t.startsWith('<table') || t.startsWith('<tr') || t === '<!--sep-->') {
       if (inList) { out.push('</ul>'); inList = false; }
       out.push(t); continue;
@@ -423,10 +438,36 @@ function md2html(md) {
   if (inTable) out.push('</table>');
   html = out.join('\n');
   html = html.replace(/<p>\s*<\/p>/g, '');
+  html = html.replace(/%%CODEBLOCK(\d+)%%/g, function(_, i) { return codeBlocks[+i] || ''; });
   return html;
 }
 
 function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function bindCopyButtons() {
+  document.querySelectorAll('#aBody .copy-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var block = btn.closest('.code-block');
+      var code = block ? block.querySelector('pre code') : null;
+      if (!code) return;
+      var text = code.innerText;
+      function ok() {
+        btn.textContent = '已复制'; btn.classList.add('copied');
+        setTimeout(function() { btn.textContent = '复制'; btn.classList.remove('copied'); }, 1500);
+      }
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); ok(); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(ok, fallback);
+      } else { fallback(); }
+    });
+  });
+}
 
 /* ================== APP LOGIC ================== */
 var activeRoom='all', query='';
@@ -496,6 +537,7 @@ function openArticle(id) {
 
   if (cache[id] !== undefined) {
     document.getElementById('aBody').innerHTML = md2html(cache[id]);
+    bindCopyButtons();
     return;
   }
   fetch(item.file, {cache:'no-store'}).then(function(r) {
@@ -506,6 +548,7 @@ function openArticle(id) {
     if (document.getElementById('articlePage').classList.contains('active') &&
         document.getElementById('aTitle').textContent === item.title) {
       document.getElementById('aBody').innerHTML = md2html(text);
+      bindCopyButtons();
     }
   }).catch(function() {
     document.getElementById('aBody').innerHTML = '<p class="loading">此卷暂不可读。</p>';
