@@ -1,1 +1,1 @@
-
+# 禁用 GitHub Pages 的 Jekyll，使 notes/*.md 以原始静态文件形式被 serve（博客前端 fetch 读取）
