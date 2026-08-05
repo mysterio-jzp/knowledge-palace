@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="seal-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c3272b"/>
+      <stop offset="1" stop-color="#8e1f24"/>
+    </linearGradient>
+  </defs>
+  <!-- 印章外框：朱红圆角方印 -->
+  <rect x="3" y="3" width="122" height="122" rx="26" fill="url(#seal-bg)"/>
+  <!-- 金色双边框 -->
+  <rect x="11" y="11" width="106" height="106" rx="20" fill="none" stroke="#e0b96a" stroke-width="3" opacity="0.95"/>
+  <rect x="19" y="19" width="90" height="90" rx="15" fill="none" stroke="#e0b96a" stroke-width="1.5" opacity="0.5"/>
+  <!-- 中心「承」字 -->
+  <text x="64" y="81" text-anchor="middle" font-size="62" font-weight="600"
+        font-family="'Ma Shan Zheng','STKaiti','KaiTi','Noto Serif SC','Songti SC',serif"
+        fill="#f5dcae">承</text>
+</svg>
