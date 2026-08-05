@@ -68,6 +68,9 @@ for f in sorted(os.listdir(os.path.join(DIST, "notes"))):
 for f in sorted(os.listdir(HERE)):
     if f.endswith(".py"):
         targets.append(f"tools/{f}")
+# 站点图标
+for f in ["favicon.svg", "favicon-32.png", "apple-touch-icon.png", "icon-192.png"]:
+    targets.append(f)
 
 print(f"=== 推送 {len(targets)} 个文件 ===")
 for t in targets:
