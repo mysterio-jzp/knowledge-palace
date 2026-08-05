@@ -51,6 +51,30 @@ def make_summary(body, n=200):
     return body[:n]
 
 
+def copy_note_images(full, notes_dir):
+    """把笔记里引用的本地图片复制到 blog-dist/notes/。
+    返回 [(原引用, 新引用 notes/xxx.png)]，供重写笔记副本里的图片路径。"""
+    text = open(full, encoding='utf-8').read()
+    note_dir = os.path.dirname(full)
+    out = []
+    for m in re.finditer(r'!\[[^\]]*\]\(([^)\s]+)\)', text):
+        ref = m.group(1)
+        if ref.startswith(('http://', 'https://', 'data:')):
+            continue
+        src = os.path.normpath(os.path.join(note_dir, ref))
+        if not os.path.isfile(src):
+            print(f'WARN  图片缺失: {full}: {ref}')
+            continue
+        new_ref = f'notes/{os.path.basename(ref)}'
+        dst = os.path.join(notes_dir, os.path.basename(ref))
+        if os.path.abspath(src) != os.path.abspath(dst):
+            if os.path.exists(dst) and open(dst, 'rb').read() != open(src, 'rb').read():
+                print(f'WARN  同名图片被覆盖: {os.path.basename(ref)}')
+            shutil.copy2(src, dst)
+        out.append((ref, new_ref))
+    return out
+
+
 # 收集 vault 内全部 .md（排除工作区与 blog-dist）
 files = []
 for dp, _, fs in os.walk(VAULT):
@@ -87,7 +111,11 @@ for idx, rel in enumerate(files):
         'file': f'notes/{idx}.md',
     }
     items.append(entry)
-    shutil.copy2(full, os.path.join(NOTES_DIR, f'{idx}.md'))
+    note_copy = text
+    for ref, new_ref in copy_note_images(full, NOTES_DIR):
+        note_copy = note_copy.replace(f']({ref})', f']({new_ref})')
+        print(f'  图片  {new_ref} <- {ref}')
+    open(os.path.join(NOTES_DIR, f'{idx}.md'), 'w', encoding='utf-8').write(note_copy)
 
 json.dump(items, open(os.path.join(DIST, 'notes.json'), 'w', encoding='utf-8'),
           ensure_ascii=False, indent=1)
