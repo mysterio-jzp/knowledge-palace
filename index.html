@@ -371,6 +371,7 @@ footer .copy{margin-top:2.6rem;color:var(--fg-faint);font-size:.78rem;letter-spa
 .a-divider{text-align:center;color:var(--gold-dim);font-size:1.2rem;letter-spacing:.5em;margin:2rem 0}
 /* wikilink style (Obsidian internal links, no target on blog) */
 .article-body .wikilink{color:var(--gold);border-bottom:1px dotted var(--gold-dim);cursor:default}
+.article-body img{max-width:100%;height:auto;border-radius:8px;border:1px solid var(--gold-dim);background:var(--ink-2);margin:1.2em 0}
 .article-body .loading{color:var(--fg-mute);letter-spacing:.3em;font-style:italic;padding:2rem 0}
 /* MathJax 公式：继承文字颜色，深浅主题均可读；块级公式可横向滚动 */
 .article-body mjx-container{color:inherit}
@@ -491,6 +492,10 @@ function md2html(md) {
   html = html.replace(/\$([^\s$](?:[^$\n]*[^\s$])?)\$/g, function(_, m) {
     mathInlines.push(m);
     return '%%MATHINLINE' + (mathInlines.length - 1) + '%%';
+  });
+  // 图片：![alt](src) -> <img>（src 保持相对路径，alt 转义防注入）
+  html = html.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function(_, alt, src) {
+    return '<img src="' + src + '" alt="' + esc(alt) + '" loading="lazy">';
   });
   // 行内 code 也要转义，否则含 < > & 的内容会被浏览器当成 HTML 标签吞掉
   html = html.replace(/`([^`]+)`/g, function(_, c) { return '<code>' + esc(c) + '</code>'; });
