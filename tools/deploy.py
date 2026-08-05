@@ -63,7 +63,7 @@ def deploy(local_rel):
 # 要推送的文件
 targets = ["index.html", "notes.json", ".nojekyll", "README.md"]
 for f in sorted(os.listdir(os.path.join(DIST, "notes"))):
-    if f.endswith(".md"):
+    if f.endswith(".md") or f.lower().endswith((".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg")):
         targets.append(f"notes/{f}")
 for f in sorted(os.listdir(HERE)):
     if f.endswith(".py"):
